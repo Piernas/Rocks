@@ -15,7 +15,7 @@
 
 // Set the level of error reporting
   error_reporting(E_ALL & ~E_NOTICE);
-  
+
   if (defined('E_DEPRECATED')) {
     error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
   }
@@ -239,7 +239,7 @@
                         array('title' => TEXT_CACHE_MANUFACTURERS, 'code' => 'manufacturers', 'file' => 'manufacturers_box-language.cache', 'multiple' => true),
                         array('title' => TEXT_CACHE_ALSO_PURCHASED, 'code' => 'also_purchased', 'file' => 'also_purchased-language.cache', 'multiple' => true)
                        );
-                       
+
   require(DIR_FS_CATALOG . 'includes/classes/hooks.php');
   $OSCOM_Hooks = new hooks('admin');
 
