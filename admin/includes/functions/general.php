@@ -473,7 +473,7 @@
       $state_prov_values = tep_db_fetch_array($state_prov_query);
       $state_prov_code = $state_prov_values['zone_code'];
     }
-    
+
     return $state_prov_code;
   }
 
@@ -496,7 +496,7 @@
 
   function tep_get_languages() {
     $languages_array = array();
-    
+
     $languages_query = tep_db_query("select languages_id, name, code, image, directory from " . TABLE_LANGUAGES . " order by sort_order");
     while ($languages = tep_db_fetch_array($languages_query)) {
       $languages_array[] = array('id' => $languages['languages_id'],
@@ -730,18 +730,6 @@
     } else {
       $zone = tep_db_fetch_array($zone_query);
       return $zone['zone_name'];
-    }
-  }
-
-////
-// Sets the status of a banner
-  function tep_set_banner_status($banners_id, $status) {
-    if ($status == '1') {
-      return tep_db_query("update " . TABLE_BANNERS . " set status = '1', expires_impressions = NULL, expires_date = NULL, date_status_change = NULL where banners_id = '" . $banners_id . "'");
-    } elseif ($status == '0') {
-      return tep_db_query("update " . TABLE_BANNERS . " set status = '0', date_status_change = now() where banners_id = '" . $banners_id . "'");
-    } else {
-      return -1;
     }
   }
 
@@ -1193,26 +1181,6 @@
     }
   }
 
-  function tep_banner_image_extension() {
-    if (function_exists('imagetypes')) {
-      if (imagetypes() & IMG_PNG) {
-        return 'png';
-      } elseif (imagetypes() & IMG_JPG) {
-        return 'jpg';
-      } elseif (imagetypes() & IMG_GIF) {
-        return 'gif';
-      }
-    } elseif (function_exists('imagecreatefrompng') && function_exists('imagepng')) {
-      return 'png';
-    } elseif (function_exists('imagecreatefromjpeg') && function_exists('imagejpeg')) {
-      return 'jpg';
-    } elseif (function_exists('imagecreatefromgif') && function_exists('imagegif')) {
-      return 'gif';
-    }
-
-    return false;
-  }
-
 ////
 // Wrapper function for round() for php3 compatibility
   function tep_round($value, $precision) {
@@ -1481,28 +1449,28 @@
 
     return $category['categories_description'];
   }
-  
+
   function tep_get_manufacturer_description($manufacturer_id, $language_id) {
     $manufacturer_query = tep_db_query("select manufacturers_description from manufacturers_info where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");
     $manufacturer = tep_db_fetch_array($manufacturer_query);
 
     return $manufacturer['manufacturers_description'];
   }
-  
+
   function tep_get_category_seo_description($category_id, $language_id) {
     $category_query = tep_db_query("select categories_seo_description from categories_description where categories_id = '" . (int)$category_id . "' and language_id = '" . (int)$language_id . "'");
     $category = tep_db_fetch_array($category_query);
 
     return $category['categories_seo_description'];
   }
-  
+
   function tep_get_category_seo_keywords($category_id, $language_id) {
     $category_query = tep_db_query("select categories_seo_keywords from categories_description where categories_id = '" . (int)$category_id . "' and language_id = '" . (int)$language_id . "'");
     $category = tep_db_fetch_array($category_query);
 
     return $category['categories_seo_keywords'];
   }
-  
+
   function tep_get_category_seo_title($category_id, $language_id = 0) {
     global $languages_id;
 
@@ -1512,21 +1480,21 @@
 
     return $category['categories_seo_title'];
   }
-  
+
   function tep_get_manufacturer_seo_description($manufacturer_id, $language_id) {
     $manufacturer_query = tep_db_query("select manufacturers_seo_description from manufacturers_info where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");
     $manufacturer = tep_db_fetch_array($manufacturer_query);
 
     return $manufacturer['manufacturers_seo_description'];
   }
-  
+
   function tep_get_manufacturer_seo_keywords($manufacturer_id, $language_id) {
     $manufacturer_query = tep_db_query("select manufacturers_seo_keywords from manufacturers_info where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");
     $manufacturer = tep_db_fetch_array($manufacturer_query);
 
     return $manufacturer['manufacturers_seo_keywords'];
   }
-  
+
   function tep_get_manufacturer_seo_title($manufacturer_id, $language_id) {
     $manufacturer_query = tep_db_query("select manufacturers_seo_title from manufacturers_info where manufacturers_id = '" . (int)$manufacturer_id . "' and languages_id = '" . (int)$language_id . "'");
     $manufacturer = tep_db_fetch_array($manufacturer_query);
@@ -1542,7 +1510,7 @@
 
     return $product['products_seo_description'];
   }
-  
+
   function tep_get_products_seo_keywords($product_id, $language_id = 0) {
     global $languages_id;
 
@@ -1552,7 +1520,7 @@
 
     return $product['products_seo_keywords'];
   }
-  
+
   function tep_get_products_seo_title($product_id, $language_id = 0) {
     global $languages_id;
 
@@ -1575,7 +1543,7 @@
       $select_string .= ' ' . $parameters;
     }
     $select_string .= '>';
-    
+
     $select_string .= '<option value="">--- ' . IMAGE_SELECT . ' ---</option>';
 
     $products_query = tep_db_query("select p.products_id, pd.products_name from " . TABLE_PRODUCTS . " p, " . TABLE_PRODUCTS_DESCRIPTION . " pd where p.products_id = pd.products_id and pd.language_id = '" . (int)$languages_id . "' order by products_name");
@@ -1608,5 +1576,4 @@
 
     return $select_string;
   }
- 
-  
+
