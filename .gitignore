@@ -21,3 +21,13 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+admin/includes/local/configure.php
+includes/local/configure.php
+includes/work/
+admin/backups/*.sql
+admin/includes/languages/espanol.php
+admin/includes/languages/espanol/*
+includes/languages/espanol.php
+includes/languages/espanol/*
+includes/languages/espanol/images/icon.gif
+*.bak
