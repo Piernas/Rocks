@@ -63,35 +63,6 @@ CREATE TABLE administrators (
   PRIMARY KEY (id)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-DROP TABLE IF EXISTS banners;
-CREATE TABLE banners (
-  banners_id int NOT NULL auto_increment,
-  banners_title varchar(64) NOT NULL,
-  banners_url varchar(255) NOT NULL,
-  banners_image varchar(64) NOT NULL,
-  banners_group varchar(10) NOT NULL,
-  banners_html_text text,
-  expires_impressions int(7) DEFAULT '0',
-  expires_date datetime DEFAULT NULL,
-  date_scheduled datetime DEFAULT NULL,
-  date_added datetime NOT NULL,
-  date_status_change datetime DEFAULT NULL,
-  status int(1) DEFAULT '1' NOT NULL,
-  PRIMARY KEY (banners_id),
-  KEY idx_banners_group (banners_group)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
-DROP TABLE IF EXISTS banners_history;
-CREATE TABLE banners_history (
-  banners_history_id int NOT NULL auto_increment,
-  banners_id int NOT NULL,
-  banners_shown int(5) NOT NULL DEFAULT '0',
-  banners_clicked int(5) NOT NULL DEFAULT '0',
-  banners_history_date datetime NOT NULL,
-  PRIMARY KEY (banners_history_id),
-  KEY idx_banners_history_banners_id (banners_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
 DROP TABLE IF EXISTS categories;
 CREATE TABLE categories (
    categories_id int NOT NULL auto_increment,
@@ -625,24 +596,6 @@ CREATE TABLE zones_to_geo_zones (
    KEY idx_zones_to_geo_zones_country_id (zone_country_id)
 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-DROP TABLE IF EXISTS testimonials;
-CREATE TABLE testimonials (
-  testimonials_id int NOT NULL auto_increment,
-  customers_name varchar(255) NOT NULL,
-  date_added datetime,
-  last_modified datetime,
-  testimonials_status tinyint(1) NOT NULL default '1',
-  PRIMARY KEY (testimonials_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
-DROP TABLE IF EXISTS testimonials_description;
-CREATE TABLE testimonials_description (
-  testimonials_id int NOT NULL,
-  languages_id int NOT NULL,
-  testimonials_text text NOT NULL,
-  PRIMARY KEY (testimonials_id, languages_id)
-) CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-
 # data
 
 # 1 - Default, 2 - USA, 3 - Spain, 4 - Singapore, 5 - Germany
@@ -651,8 +604,6 @@ INSERT INTO address_format VALUES (2, '$firstname $lastname$cr$streets$cr$city, 
 INSERT INTO address_format VALUES (3, '$firstname $lastname$cr$streets$cr$city$cr$postcode - $statecomma$country','$state / $country');
 INSERT INTO address_format VALUES (4, '$firstname $lastname$cr$streets$cr$city ($postcode)$cr$country', '$postcode / $country');
 INSERT INTO address_format VALUES (5, '$firstname $lastname$cr$streets$cr$postcode $city$cr$country','$city / $country');
-
-INSERT INTO banners VALUES (1, 'osCommerce', 'http://www.oscommerce.com', 'banners/oscommerce.gif', 'footer', '', 0, null, null, now(), null, 1);
 
 INSERT INTO categories VALUES ('1', 'category_hardware.gif', '0', '1', now(), null);
 INSERT INTO categories VALUES ('2', 'category_software.gif', '0', '2', now(), null);
@@ -1320,7 +1271,6 @@ INSERT INTO reviews_description VALUES (1,1, 'This has to be one of the funniest
 INSERT INTO sec_directory_whitelist values (null, 'admin/backups');
 INSERT INTO sec_directory_whitelist values (null, 'admin/images/graphs');
 INSERT INTO sec_directory_whitelist values (null, 'images');
-INSERT INTO sec_directory_whitelist values (null, 'images/banners');
 INSERT INTO sec_directory_whitelist values (null, 'images/dvd');
 INSERT INTO sec_directory_whitelist values (null, 'images/gt_interactive');
 INSERT INTO sec_directory_whitelist values (null, 'images/hewlett_packard');
