@@ -10,12 +10,14 @@
   Released under the GNU General Public License
 */
 ?>
-
+  </div>
 </div>
 
 <?php require('includes/footer.php'); ?>
 
 <br />
+
+<script src="../ext/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>
